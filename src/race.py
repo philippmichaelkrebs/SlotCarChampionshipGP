@@ -14,6 +14,7 @@ class RaceResult:
 
     @property
     def position(self):
+        '''return the position of the driver'''
         return self._position
 
     @position.setter
@@ -24,6 +25,7 @@ class RaceResult:
 
     @property
     def driver(self):
+        '''return the name of the driver'''
         return self._driver
 
     @driver.setter
@@ -34,6 +36,7 @@ class RaceResult:
 
     @property
     def laps(self):
+        '''return the number of laps of the driver'''
         return self._laps
 
     @laps.setter
@@ -44,6 +47,7 @@ class RaceResult:
 
     @property
     def time(self):
+        '''return the time'''
         return self._time
 
     @time.setter
@@ -54,6 +58,7 @@ class RaceResult:
 
     @property
     def car(self):
+        '''return the name of the car'''
         return self._car
 
     @car.setter
@@ -64,6 +69,7 @@ class RaceResult:
 
     @property
     def best_lap_time(self):
+        '''return the best lap time'''
         return self._best_lap_time
 
     @best_lap_time.setter
@@ -74,6 +80,7 @@ class RaceResult:
 
     @property
     def race_id(self):
+        '''return the id of the race result'''
         return self._race_id
 
     @race_id.setter
@@ -86,8 +93,3 @@ class RaceResult:
         return (f"Race(Position: {self.position}, Driver: {self.driver}, Laps: {self.laps}, "
                 f"Time: {self.time}, Car: {self.car}, Best Lap Time: {self.best_lap_time}, "
                 f"Race Number: {self.race_id})")
-
-class RaceResultContainer:
-
-    def __init__(self):
-        pass

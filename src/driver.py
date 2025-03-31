@@ -41,6 +41,10 @@ class Driver:
 
     @property
     def best_grand_prix(self) -> RaceResult:
+        '''
+        Returns the best grand prix of the driver.
+        The best grand prix is the one with the most laps completed.'
+        '''
         if not self.race_results:
             return None
         # Max rounds, then min time
@@ -49,6 +53,14 @@ class Driver:
 
     @property
     def fastest_lap_race_result(self) -> RaceResult:
+        '''
+        Returns race result with the fastest lap of the driver.
+
+        Returns
+        ------------
+        result: RaceResult
+            RaceResult with the fastest lap of the driver.
+        '''
         if not self.race_results:
             return None
         best_race = min(self.race_results, key=lambda r: (r.best_lap_time))
@@ -56,4 +68,5 @@ class Driver:
 
     @property
     def fastest_lap(self) -> int:
+        '''returns the time of the fastest lap of the driver'''
         return self.fastest_lap_race_result.best_lap_time

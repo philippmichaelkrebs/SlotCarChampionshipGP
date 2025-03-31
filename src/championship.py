@@ -1,3 +1,6 @@
+'''
+This module contains the GrandPrix class and the Championship class.
+'''
 
 import datetime
 from typing import Callable
@@ -140,7 +143,8 @@ class Championship:
             List of Driver objects sorted by results.
         '''
         last_grand_prix = self.grand_prix[-1] if self.grand_prix else None
-        sorted_gp = sorted(last_grand_prix.results, key=lambda r: (-r.laps, r.time)) if last_grand_prix else []
+        sorted_gp = sorted(last_grand_prix.results,
+                           key=lambda r: (-r.laps, r.time)) if last_grand_prix else []
         return sorted_gp
 
     def get_grand_prix_index(self) -> int:

@@ -5,7 +5,8 @@ import os
 import sys
 import time
 
-from src.renderer import generate_championship_page, generate_sprint_ranking_page, generate_fastest_lap_page, generate_grand_prix_page
+from src.renderer import generate_championship_page, generate_sprint_ranking_page
+from src.renderer import generate_fastest_lap_page, generate_grand_prix_page
 from src.decode_methods import parse_results_cockpitxp
 
 FILE_PATH = ''

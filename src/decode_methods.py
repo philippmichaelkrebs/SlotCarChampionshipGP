@@ -1,3 +1,7 @@
+'''
+Methods to decode the results from different formats.
+'''
+
 import re
 import datetime
 from src.championship import GrandPrix, Championship
