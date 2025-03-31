@@ -93,8 +93,7 @@ def generate_championship_page(championship: Championship) -> None:
                 if _driver_prep[_idx-1].total_laps - driver.total_laps == 1:
                     _person_int_front = '1 Lap'
                 else:
-                    _person_int_front = f'{_driver_prep[_idx-1].total_laps -
-                                           driver.total_laps} Laps'
+                    _person_int_front = f'{_driver_prep[_idx-1].total_laps-driver.total_laps} Laps'
 
         _driver.append((_gap, _person_int_front, driver))
         _idx += 1
