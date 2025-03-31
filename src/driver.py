@@ -48,9 +48,12 @@ class Driver:
         return best_race
 
     @property
-    def fastest_lap(self) -> int:
+    def fastest_lap_race_result(self) -> RaceResult:
         if not self.race_results:
             return None
-        # Max rounds, then min time
         best_race = min(self.race_results, key=lambda r: (r.best_lap_time))
-        return best_race.best_lap_time
+        return best_race
+
+    @property
+    def fastest_lap(self) -> int:
+        return self.fastest_lap_race_result.best_lap_time

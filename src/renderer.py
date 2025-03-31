@@ -124,22 +124,38 @@ def generate_fastest_lap_page(championship: Championship) -> None:
     Generates the fastest lap page for the championship.
     '''
     env = Environment(loader=FileSystemLoader("templates"))
-    template = env.get_template("sprint_ranking.html")
+    template = env.get_template("fastest_lap.html")
+
+    _driver_prep = championship.get_driver_result(lambda d: (d.fastest_lap))
+    _idx = 0
+    _driver = []
+    for driver in _driver_prep:
+        _gap = ''
+        _person_int_front = ''
+        if 0 < _idx:
+            # gap to leader
+            _gap = milliseconds_to_time(driver.fastest_lap - _driver_prep[0].fastest_lap)
+
+            # gap to person in front
+            _person_int_front = milliseconds_to_time(driver.fastest_lap -
+                                                         _driver_prep[_idx-1].fastest_lap)
+
+        _driver.append((_gap, _person_int_front, driver))
+        _idx += 1
+
+    counter = count(1)
     data = {
         "championship_name": championship.name,
         "results": [
             {
-                "position": res.best_grand_prix.position,
+                "position": next(counter),
                 "name": res.name,
-                "laps": res.best_grand_prix.laps,
-                "time": milliseconds_to_time(res.best_grand_prix.time),
-                "car": res.best_grand_prix.car,
                 "lap_time": milliseconds_to_time(res.fastest_lap),
-                "best_placement": res.best_grand_prix.position,
-                "num_grand_prix": res.number_of_grands_prix,
-                "best_grand_prix": res.best_grand_prix.race_id,
+                "automotive": res.fastest_lap_race_result.car,
+                "gap": gap,
+                "person_in_front": person_in_front # interval is gap between 2 drivers
             }
-            for res in championship.get_driver_result(lambda d: (d.fastest_lap))
+            for (gap,person_in_front,res) in _driver
         ],
     }
 
