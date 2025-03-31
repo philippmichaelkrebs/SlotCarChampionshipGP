@@ -172,7 +172,7 @@ class Championship:
         GrandPrix
             A new GrandPrix object.
         '''
-        grand_prix = GrandPrix(self.get_grand_prix_index(), 
+        grand_prix = GrandPrix(self.get_grand_prix_index(),
                                f"Grand Prix {self.get_grand_prix_index()}", self.date, "")
         return grand_prix
 
