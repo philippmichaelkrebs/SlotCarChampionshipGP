@@ -162,3 +162,61 @@ def generate_fastest_lap_page(championship: Championship) -> None:
     output_html = template.render(data)
     with open("output/fastest_lap.html", "w", encoding="utf-8") as file:
         file.write(output_html)
+
+def generate_grand_prix_page(championship: Championship) -> None:
+    '''Generates the results page for the championship'''
+    env = Environment(loader=FileSystemLoader("templates"))
+    template = env.get_template("grand_prix.html")
+
+    _race_result_prep = championship.get_driver_result_last_grand_prix()
+    _idx = 0
+    _race_result = []
+    for _result in _race_result_prep:
+        _gap = ''
+        _person_int_front = ''
+        if 0 < _idx:
+            # gap to leader
+            if _result.laps == _race_result_prep[0].laps:
+                _gap = milliseconds_to_time(_result.time - _race_result_prep[0].time)
+            else:
+                if _race_result_prep[0].laps - _result.laps == 1:
+                    _gap = '1 Lap'
+                else:
+                    _gap = f'{_race_result_prep[0].laps -
+                                           _result.laps} Laps'
+
+            # gap to person in front
+            if _result.laps == _race_result_prep[_idx-1].laps:
+                _person_int_front = milliseconds_to_time(_result.time -
+                                                         _race_result_prep[_idx-1].time)
+            else:
+                if _race_result_prep[_idx-1].laps - _result.laps == 1:
+                    _person_int_front = '1 Lap'
+                else:
+                    _person_int_front = f'{_race_result_prep[_idx-1].laps -
+                                           _result.laps} Laps'
+
+        _race_result.append((_gap, _person_int_front, _result))
+        _idx += 1
+
+    counter = count(1)
+    data = {
+        "championship_name": championship.name,
+        "results": [
+            {
+                "position": next(counter),
+                "name": res.driver,
+                "laps": res.laps,
+                "time": milliseconds_to_time(res.time),
+                "car": res.car,
+                "gap": gap,
+                "person_in_front": person_in_front,
+                "lap_time": milliseconds_to_time(res.best_lap_time),
+            }
+            for (gap,person_in_front,res) in _race_result
+        ],
+    }
+
+    output_html = template.render(data)
+    with open("output/grand_prix.html", "w", encoding="utf-8") as file:
+        file.write(output_html)

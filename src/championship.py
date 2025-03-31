@@ -104,7 +104,6 @@ class Championship:
         list
             List of Driver objects sorted by best grand prix results.
         '''
-        print(len(self.drivers))
         if not self.drivers:
             return []
         sorted_drivers = sorted(self.drivers, key=sorted_key)
@@ -125,12 +124,24 @@ class Championship:
         list
             List of sorted RaceResult objects by laps and time.
         '''
-        print(len(self.drivers))
         if not self.drivers:
             return []
         drivers_best_results = [d.get_best_race() for d in self.drivers]
         sorted_drivers = sorted(drivers_best_results, key=sort_key)
         return sorted_drivers
+
+    def get_driver_result_last_grand_prix(self) -> List[RaceResult]:
+        '''
+        Returns the best result of all drivers who drove the last Grand Prix.
+
+        Returns
+        ------------
+        list
+            List of Driver objects sorted by results.
+        '''
+        last_grand_prix = self.grand_prix[-1] if self.grand_prix else None
+        sorted_gp = sorted(last_grand_prix.results, key=lambda r: (-r.laps, r.time)) if last_grand_prix else []
+        return sorted_gp
 
     def get_grand_prix_index(self) -> int:
         '''

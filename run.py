@@ -5,7 +5,7 @@ import os
 import sys
 import time
 
-from src.renderer import generate_championship_page, generate_sprint_ranking_page, generate_fastest_lap_page
+from src.renderer import generate_championship_page, generate_sprint_ranking_page, generate_fastest_lap_page, generate_grand_prix_page
 from src.decode_methods import parse_results_cockpitxp
 
 FILE_PATH = ''
@@ -27,6 +27,7 @@ def monitor_file():
         generate_championship_page(result)
         generate_sprint_ranking_page(result)
         generate_fastest_lap_page(result)
+        generate_grand_prix_page(result)
         inital_run = False
 
     last_mtime = os.path.getmtime(FILE_PATH)  # Get initial modification time
@@ -40,6 +41,7 @@ def monitor_file():
             generate_championship_page(result)
             generate_sprint_ranking_page(result)
             generate_fastest_lap_page(result)
+            generate_grand_prix_page(result)
 
 
 if len(sys.argv) > 1:

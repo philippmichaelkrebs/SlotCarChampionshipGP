@@ -54,7 +54,7 @@ def parse_results_cockpitxp(file_path:str) -> Championship:
                 continue
             name = remove_extra_whitespaces(name)
 
-            car = remove_extra_whitespaces(line[25:80])[:-1]
+            car = remove_extra_whitespaces(line[25:80])
             rounds = int(re.sub(r'\s+', '', line[80:86]))
             time = int(re.sub(r'\s+', '', line[86:96]))
             position = int(re.sub(r'\s+', '', line[96:99]))

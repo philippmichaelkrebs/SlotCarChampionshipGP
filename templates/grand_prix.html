@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<table>
+    <thead>
+        <tr>
+            <th>Position</th>
+            <th>Driver</th>
+            <th>Laps</th>
+            <th>Time</th>
+            <th>Car</th>
+            <th>Gap</th>
+            <th>INT</th>
+            <th>Fastest Lap</th>
+        </tr>
+    </thead>
+    {% for result in results %}
+    <tr>
+        <td>{{ result.position }}</td>
+        <td>{{ result.name }}</td>
+        <td>{{ result.laps }}</td>
+        <td>{{ result.time }}</td>
+        <td>{{ result.car }}</td>
+        <td>{{ result.gap }}</td>
+        <td>{{ result.person_in_front }}</td>
+        <td>{{ result.lap_time }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}
