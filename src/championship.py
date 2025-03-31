@@ -1,5 +1,6 @@
 
 import datetime
+from typing import Callable
 from typing import List
 from src.race import RaceResult
 from src.driver import Driver
@@ -36,11 +37,11 @@ class GrandPrix:
         self._results.append(race_result)
 
 
-class Championchip:
-    '''Championchip class assigns grand prix to a championchip'''
+class Championship:
+    '''Championship class assigns grand prix to a championship'''
 
     def __init__(self, name:str, date:datetime.datetime):
-        '''Initializes a Championchip with name and date.'''
+        '''Initializes a Championship with name and date.'''
         self.name = name
         self.date = date
         self.drivers : List[Driver] = []
@@ -48,7 +49,7 @@ class Championchip:
 
     def add_result(self, grandprix: GrandPrix) -> None:
         """
-        Adds a grand prix to the championchip.
+        Adds a grand prix to the championship.
 
         Parameters
         ------------
@@ -88,10 +89,16 @@ class Championchip:
         else:
             return None
 
-    def get_driver_result(self) -> List[Driver]:
+    def get_driver_result(self, sorted_key: Callable[[Driver], tuple] = lambda d:
+                        (-d.best_grand_prix.laps, d.best_grand_prix.time)) -> List[Driver]:
         '''
         Returns the best result of all drivers
         
+        Parameters
+        ------------
+        sorted_key: 'Callable', default None
+            Optional parameter to sort the Driver objects. Default is sorting by laps and time.
+
         Returns
         ------------
         list
@@ -100,13 +107,19 @@ class Championchip:
         print(len(self.drivers))
         if not self.drivers:
             return []
-        sorted_drivers = sorted(self.drivers, key=lambda d: (-d.best_grand_prix.laps, d.best_grand_prix.time))
+        sorted_drivers = sorted(self.drivers, key=sorted_key)
         return sorted_drivers
 
-    def get_race_result(self) -> List[RaceResult]:
+    def get_race_result(self, sort_key: Callable[[RaceResult], tuple] = lambda rr:
+                        (-rr.laps, rr.time)) -> List[RaceResult]:
         '''
         Returns the best result of all drivers
         
+        Parameters
+        ------------
+        sort_key: 'Callable', default None
+            Optional parameter to sort the RaceResult objects. Default is sorting by laps and time.
+
         Returns
         ------------
         list
@@ -116,7 +129,7 @@ class Championchip:
         if not self.drivers:
             return []
         drivers_best_results = [d.get_best_race() for d in self.drivers]
-        sorted_drivers = sorted(drivers_best_results, key=lambda d: (-d.laps, d.time))
+        sorted_drivers = sorted(drivers_best_results, key=sort_key)
         return sorted_drivers
 
     def get_grand_prix_index(self) -> int:

@@ -25,8 +25,8 @@ class Driver:
         return self._name
 
     @property
-    def total_rounds(self) -> int:
-        '''returns the total number of rounds of the driver'''
+    def total_laps(self) -> int:
+        '''returns the total number of laps of the driver'''
         return sum(r.laps for r in self.race_results)
 
     @property

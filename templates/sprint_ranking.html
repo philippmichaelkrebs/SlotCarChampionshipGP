@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<table>
+    <thead>
+        <tr>
+            <th>Position</th>
+            <th>Driver</th>
+            <th>Laps</th>
+            <th>Time</th>
+            <th>Car</th>
+            <th>Fastest Lap</th>
+            <th>Best Placement</th>
+            <th>Grands Prix</th>
+            <th>Best Grand Prix</th>
+        </tr>
+    </thead>
+    {% for result in results %}
+    <tr>
+        <td>{{ result.position }}</td>
+        <td>{{ result.name }}</td>
+        <td>{{ result.laps }}</td>
+        <td>{{ result.time }}</td>
+        <td>{{ result.car }}</td>
+        <td>{{ result.lap_time }}</td>
+        <td>{{ result.best_placement}}</td>
+        <td>{{ result.num_grand_prix}}</td>
+        <td>{{ result.best_grand_prix}}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

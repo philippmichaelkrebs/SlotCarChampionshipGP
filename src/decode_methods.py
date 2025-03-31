@@ -1,6 +1,6 @@
 import re
 import datetime
-from src.championchip import GrandPrix, Championchip
+from src.championship import GrandPrix, Championship
 from src.race import RaceResult
 
 def remove_extra_whitespaces(text:str) -> str:
@@ -20,7 +20,7 @@ def remove_extra_whitespaces(text:str) -> str:
     return re.sub(r'\s+', ' ', text).strip()
 
 
-def parse_results_cockpitxp(file_path:str) -> Championchip:
+def parse_results_cockpitxp(file_path:str) -> Championship:
     '''
     Parses the results from a file and returns a Championchip object.
     The file is expected to be in the cockpitXP format.
@@ -37,7 +37,7 @@ def parse_results_cockpitxp(file_path:str) -> Championchip:
     '''
     grandprix_index = 0
     grand_prix : GrandPrix = None
-    championchip = Championchip("Ferraro", datetime.datetime.now())
+    championchip = Championship("Ferraro", datetime.datetime.now())
 
     with open(file_path, "r", encoding="utf-8") as reader:
         for line in reader:
