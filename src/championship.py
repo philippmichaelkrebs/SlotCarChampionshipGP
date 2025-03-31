@@ -89,8 +89,7 @@ class Championship:
             new_driver = Driver(name)
             self.drivers.append(new_driver)
             return new_driver
-        else:
-            return None
+        return None
 
     def get_driver_result(self, sorted_key: Callable[[Driver], tuple] = lambda d:
                         (-d.best_grand_prix.laps, d.best_grand_prix.time)) -> List[Driver]:

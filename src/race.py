@@ -1,17 +1,15 @@
 '''This module contains the RaceResult class and the RaceResultContainer class.'''
 
-
 class RaceResult:
     '''RaceResult class stores a result of a race of a driver   '''
-    def __init__(self, position, driver, laps, time, car, best_lap_time, race_id):
-        self._position = position
-        self._driver = driver
-        self._laps = laps
-        self._time = time
-        self._car = car
-        self._best_lap_time = best_lap_time
-        self._race_id = race_id
-
+    def __init__(self, result: dict[str,any]) -> None:
+        self._position = result['position']
+        self._driver = result['driver']
+        self._laps = result['laps']
+        self._time = result['time']
+        self._car = result['car']
+        self._best_lap_time = result['best_lap_time']
+        self._race_id = result['id']
     @property
     def position(self):
         '''return the position of the driver'''

@@ -83,8 +83,7 @@ def generate_championship_page(championship: Championship) -> None:
                 if _driver_prep[0].total_laps - driver.total_laps == 1:
                     _gap = '1 Lap'
                 else:
-                    _gap = f'{_driver_prep[0].total_laps -
-                                           driver.total_laps} Laps'
+                    _gap = f'{_driver_prep[0].total_laps-driver.total_laps} Laps'
 
             # gap to person in front
             if driver.total_laps == _driver_prep[_idx-1].total_laps:

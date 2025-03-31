@@ -58,13 +58,16 @@ def parse_results_cockpitxp(file_path:str) -> Championship:
                 continue
             name = remove_extra_whitespaces(name)
 
-            car = remove_extra_whitespaces(line[25:80])
-            rounds = int(re.sub(r'\s+', '', line[80:86]))
-            time = int(re.sub(r'\s+', '', line[86:96]))
-            position = int(re.sub(r'\s+', '', line[96:99]))
-            lap_time = int(re.sub(r'\s+', '', line[99:]))
+            result = {'driver': name}
 
-            _res = RaceResult(position,name,rounds,time,car,lap_time,grandprix_index)
+            result['car'] = remove_extra_whitespaces(line[25:80])
+            result['laps'] = int(re.sub(r'\s+', '', line[80:86]))
+            result['time'] = int(re.sub(r'\s+', '', line[86:96]))
+            result['position'] = int(re.sub(r'\s+', '', line[96:99]))
+            result['best_lap_time'] = int(re.sub(r'\s+', '', line[99:]))
+            result['id'] = grandprix_index
+
+            _res = RaceResult(result)
             grand_prix.add_race_result(_res)
 
     championchip.add_result(grand_prix)
