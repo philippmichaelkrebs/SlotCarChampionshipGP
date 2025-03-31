@@ -194,8 +194,7 @@ def generate_grand_prix_page(championship: Championship) -> None:
                 if _race_result_prep[_idx-1].laps - _result.laps == 1:
                     _person_int_front = '1 Lap'
                 else:
-                    _person_int_front = f'{_race_result_prep[_idx-1].laps -
-                                           _result.laps} Laps'
+                    _person_int_front = f'{_race_result_prep[_idx-1].laps-_result.laps} Laps'
 
         _race_result.append((_gap, _person_int_front, _result))
         _idx += 1
