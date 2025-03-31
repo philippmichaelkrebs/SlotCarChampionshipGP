@@ -10,6 +10,7 @@ class RaceResult:
         self._car = result['car']
         self._best_lap_time = result['best_lap_time']
         self._race_id = result['id']
+
     @property
     def position(self):
         '''return the position of the driver'''

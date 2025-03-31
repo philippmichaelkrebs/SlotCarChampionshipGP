@@ -23,7 +23,9 @@
         <td>{{ result.car }}</td>
         <td>{{ result.gap }}</td>
         <td>{{ result.person_in_front }}</td>
-        <td>{{ result.lap_time }}</td>
+        <td class="{% if result.lap_time == fastest_lap %}green-cell{% endif %}">
+            {{ result.lap_time }}
+        </td>
     </tr>
     {% endfor %}
 </table>

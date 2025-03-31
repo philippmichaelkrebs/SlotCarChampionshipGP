@@ -39,7 +39,6 @@ def parse_results_cockpitxp(file_path:str) -> Championship:
     Championchip
         The Championchip object containing the parsed results.
     '''
-    grandprix_index = 0
     grand_prix : GrandPrix = None
     championchip = Championship("Ferraro", datetime.datetime.now())
 
@@ -65,7 +64,7 @@ def parse_results_cockpitxp(file_path:str) -> Championship:
             result['time'] = int(re.sub(r'\s+', '', line[86:96]))
             result['position'] = int(re.sub(r'\s+', '', line[96:99]))
             result['best_lap_time'] = int(re.sub(r'\s+', '', line[99:]))
-            result['id'] = grandprix_index
+            result['id'] = grand_prix.id
 
             _res = RaceResult(result)
             grand_prix.add_race_result(_res)

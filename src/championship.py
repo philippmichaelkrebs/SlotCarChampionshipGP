@@ -11,12 +11,18 @@ from src.driver import Driver
 class GrandPrix:
     '''Grand Prix class assigns results to a grand prix'''
 
-    def __init__(self, name:str, date:datetime.datetime, location:str):
+    def __init__(self, grand_prix_id:int, name:str, date:datetime.datetime, location:str):
         '''Initializes a Grand Prix with name, date, and location.'''
+        self._id = grand_prix_id
         self._name = name
         self._date = date
         self._location = location
         self._results : List[RaceResult] = []
+
+    @property
+    def id(self) -> int:
+        '''Returns the ID of the Grand Prix.'''
+        return self._id
 
     @property
     def name(self) -> str:
@@ -166,7 +172,8 @@ class Championship:
         GrandPrix
             A new GrandPrix object.
         '''
-        grand_prix = GrandPrix(f"Grand Prix {self.get_grand_prix_index()}", self.date, "Location")
+        grand_prix = GrandPrix(self.get_grand_prix_index(), 
+                               f"Grand Prix {self.get_grand_prix_index()}", self.date, "")
         return grand_prix
 
     def get_grand_prix(self, index:int) -> GrandPrix:

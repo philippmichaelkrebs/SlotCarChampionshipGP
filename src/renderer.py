@@ -41,9 +41,12 @@ def generate_sprint_ranking_page(championship: Championship) -> None:
     '''
     env = Environment(loader=FileSystemLoader("templates"))
     template = env.get_template("sprint_ranking.html")
+    result = championship.get_driver_result()
+    fastest_lap = min(res.fastest_lap for res in result)
     data = {
         "championship_name": championship.name,
         "last_update": datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+        "fastest_lap": milliseconds_to_time(fastest_lap),
         "results": [
             {
                 "position": res.best_grand_prix.position,
@@ -56,7 +59,7 @@ def generate_sprint_ranking_page(championship: Championship) -> None:
                 "num_grand_prix": res.number_of_grands_prix,
                 "best_grand_prix": res.best_grand_prix.race_id,
             }
-            for res in championship.get_driver_result()
+            for res in result
         ],
     }
 
@@ -98,10 +101,12 @@ def generate_championship_page(championship: Championship) -> None:
         _driver.append((_gap, _person_int_front, driver))
         _idx += 1
 
+    fastest_lap = min(drv.fastest_lap for drv in _driver_prep)
     counter = count(1)
     data = {
         "championship_name": championship.name,
         "last_update": datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+        "fastest_lap": milliseconds_to_time(fastest_lap),
         "results": [
             {
                 "position": next(counter),
@@ -199,10 +204,12 @@ def generate_grand_prix_page(championship: Championship) -> None:
         _race_result.append((_gap, _person_int_front, _result))
         _idx += 1
 
+    fastest_lap = min(res.best_lap_time for res in _race_result_prep)
     counter = count(1)
     data = {
         "championship_name": championship.name,
         "last_update": datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+        "fastest_lap": milliseconds_to_time(fastest_lap),
         "results": [
             {
                 "position": next(counter),
