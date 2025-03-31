@@ -5,6 +5,7 @@ It takes a `Championship` object as input and generates an HTML
 file with the results of the championship.
 '''
 
+import datetime
 from datetime import timedelta
 from itertools import count
 from jinja2 import Environment, FileSystemLoader
@@ -42,6 +43,7 @@ def generate_sprint_ranking_page(championship: Championship) -> None:
     template = env.get_template("sprint_ranking.html")
     data = {
         "championship_name": championship.name,
+        "last_update": datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
         "results": [
             {
                 "position": res.best_grand_prix.position,
@@ -101,6 +103,7 @@ def generate_championship_page(championship: Championship) -> None:
     counter = count(1)
     data = {
         "championship_name": championship.name,
+        "last_update": datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
         "results": [
             {
                 "position": next(counter),
@@ -146,6 +149,7 @@ def generate_fastest_lap_page(championship: Championship) -> None:
     counter = count(1)
     data = {
         "championship_name": championship.name,
+        "last_update": datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
         "results": [
             {
                 "position": next(counter),
@@ -202,6 +206,7 @@ def generate_grand_prix_page(championship: Championship) -> None:
     counter = count(1)
     data = {
         "championship_name": championship.name,
+        "last_update": datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
         "results": [
             {
                 "position": next(counter),
