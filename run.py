@@ -45,9 +45,12 @@ def monitor_file():
             generate_grand_prix_page(result)
 
 
-if len(sys.argv) > 1:
-    FILE_PATH = sys.argv[1]
+if __name__ == "__main__":
+    FILE_PATH = 'results.txt'
 else:
-    raise ValueError("Please provide the file path as an argument.")
+    if len(sys.argv) > 1:
+        FILE_PATH = sys.argv[1]
+    else:
+        raise ValueError("Please provide the file path as an argument.")
 
 monitor_file()
