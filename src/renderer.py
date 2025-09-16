@@ -43,13 +43,15 @@ def generate_sprint_ranking_page(championship: Championship) -> None:
     template = env.get_template("sprint_ranking.html")
     result = championship.get_driver_result()
     fastest_lap = min(res.fastest_lap for res in result)
+
+    counter = count(1)
     data = {
         "championship_name": championship.name,
         "last_update": datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
         "fastest_lap": milliseconds_to_time(fastest_lap),
         "results": [
             {
-                "position": res.best_grand_prix.position,
+                "position": next(counter),
                 "name": res.name,
                 "laps": res.best_grand_prix.laps,
                 "time": milliseconds_to_time(res.best_grand_prix.time),
