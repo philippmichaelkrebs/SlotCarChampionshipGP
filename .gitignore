@@ -4,6 +4,7 @@ credentials.json
 test*
 output/
 *.txt
+/*.html
 
 __pycache__/
 *.py[cod]
