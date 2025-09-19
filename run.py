@@ -46,11 +46,9 @@ def monitor_file():
 
 
 if __name__ == "__main__":
-    FILE_PATH = 'results.txt'
-else:
     if len(sys.argv) > 1:
         FILE_PATH = sys.argv[1]
     else:
         raise ValueError("Please provide the file path as an argument.")
 
-monitor_file()
+    monitor_file()
